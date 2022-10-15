@@ -7,6 +7,6 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/userList.jsp").forward(request, response);
+        response.sendRedirect("http://google.com");
     }
 }
