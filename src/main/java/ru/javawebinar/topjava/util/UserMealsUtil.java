@@ -25,7 +25,19 @@ public class UserMealsUtil {
 //        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
 //        mealsTo.forEach(System.out::println);
 
-        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
+        List<UserMealWithExcess> mealsTo = filteredByCycles2(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        mealsTo.forEach(System.out::println);
+
+        //System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
+    }
+
+    private static List<UserMealWithExcess> filteredByCycles2(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+        Map<LocalDate, Integer> caloriesSumPerDate = new HashMap<>();
+        for (UserMeal meal : meals) {
+            LocalDate mealDate = meal.getDateTime().toLocalDate();
+            caloriesSumPerDate.put(mealDate, caloriesSumPerDate.getOrDefault(mealDate,0) + meal.getCalories());
+        }
+        return null;
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
@@ -63,10 +75,11 @@ public class UserMealsUtil {
                 .filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getDateTime().toLocalTime(), startTime, endTime))
                 .map(meal -> new UserMealWithExcess(meal.getDateTime(), meal.getDescription(), meal.getCalories(),
                                 map1.get(meal.getDateTime().toLocalDate())
-                                        .stream().collect(Collectors.summingInt(m->m.getCalories()))>caloriesPerDay
+                                        .stream().collect(Collectors.summingInt(m -> m.getCalories())) > caloriesPerDay
                         )
                 )
                 .collect(Collectors.toList());
+
 
         return userMealWithExcessList;
     }
