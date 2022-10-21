@@ -25,12 +25,17 @@ public class MealServlet extends HttpServlet {
         log.debug("action=" + action);
         if (action != null) {
             if (action.equals("add")) {
+                request.setAttribute("meal", new Meal());
                 request.getRequestDispatcher("/form.jsp").forward(request, response);
             } else if (action.equals("delete")) {
                 Integer id = Integer.parseInt(request.getParameter("id"));
                 mealRepository.delete(id);
                 response.sendRedirect("meals");
 
+            } else if (action.equals("edit")) {
+                Integer id = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("meal", mealRepository.get(id));
+                request.getRequestDispatcher("/form.jsp").forward(request, response);
             }
         } else {
             log.debug("forward to meals");
@@ -43,13 +48,16 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         log.debug("doPost action=" + action);
 
+
+        Integer id = req.getParameter("id") == null ? null : Integer.parseInt(req.getParameter("id"));
         String dateTime = req.getParameter("dateTime");
         String description = req.getParameter("description");
         String calories = req.getParameter("calories");
-        Meal meal = new Meal(LocalDateTime.parse(dateTime), description, Integer.parseInt(calories));
+        Meal meal = new Meal(id, LocalDateTime.parse(dateTime), description, Integer.parseInt(calories));
         log.debug("doPost meal = " + meal);
         mealRepository.add(meal);
         resp.sendRedirect("meals");
