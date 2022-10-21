@@ -10,4 +10,6 @@ public interface MealRepository {
     Meal add(Meal meal);
 
     boolean delete(Integer id);
+
+    Meal get(Integer id);
 }

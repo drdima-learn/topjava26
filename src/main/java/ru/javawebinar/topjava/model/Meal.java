@@ -23,12 +23,21 @@ public class Meal {
         this(null, dateTime, description, calories);
     }
 
+    public Meal() {
+        this.id = null;
+        this.dateTime = null;
+        this.description = null;
+        this.calories = 0;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        if (this.id==null) {
+            this.id = id;
+        }
     }
 
     public LocalDateTime getDateTime() {
