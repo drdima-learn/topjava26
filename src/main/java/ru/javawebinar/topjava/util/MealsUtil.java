@@ -48,7 +48,7 @@ public class MealsUtil {
     }
 
 
-    public static List<MealTo> createTos(List<Meal> meals){
-        return filteredByStreams(meals, LocalTime.MIN, LocalTime.MAX, 2000);
+    public static List<MealTo> getWithExceeded(List<Meal> meals, int maxCalories){
+        return filteredByStreams(meals, LocalTime.MIN, LocalTime.MAX, maxCalories);
     }
 }

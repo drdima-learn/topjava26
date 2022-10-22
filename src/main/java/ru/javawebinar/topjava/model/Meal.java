@@ -30,6 +30,11 @@ public class Meal {
         this.calories = 0;
     }
 
+
+    public boolean isNew() {
+        return id == null;
+    }
+
     public Integer getId() {
         return id;
     }

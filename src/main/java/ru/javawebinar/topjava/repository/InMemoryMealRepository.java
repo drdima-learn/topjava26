@@ -29,8 +29,8 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public Meal add(Meal meal) {
-        if (isNew(meal)) {
+    public Meal save(Meal meal) {
+        if (meal.isNew()) {
             meal.setId(counter.getAndIncrement());
         }
         map.put(meal.getId(), meal);
@@ -43,11 +43,9 @@ public class InMemoryMealRepository implements MealRepository {
         return meal.getId() == id;
     }
 
-    private boolean isNew(Meal meal) {
-        return meal.getId() == null;
-    }
+
 
     private void init() {
-        MealsUtil.meals.forEach(m -> add(m));
+        MealsUtil.meals.forEach(m -> save(m));
     }
 }
