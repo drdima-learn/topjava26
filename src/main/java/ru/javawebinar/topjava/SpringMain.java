@@ -20,23 +20,23 @@ public class SpringMain {
             InMemoryUserRepository inMemoryUserRepository = appCtx.getBean(InMemoryUserRepository.class);
             User user = inMemoryUserRepository.get(2);
             System.out.println("get 2" + user);
-            inMemoryUserRepository.delete(2);
-            user = inMemoryUserRepository.get(2);
-            System.out.println("get 2, after delete 2 " + user);
+//            inMemoryUserRepository.delete(2);
+//            user = inMemoryUserRepository.get(2);
+//            System.out.println("get 2, after delete 2 " + user);
             System.out.println("-------------");
             System.out.println("getAll() + " + inMemoryUserRepository.getAll());
             System.out.println("getByEmail() + " + inMemoryUserRepository.getByEmail("admin@gmail.com"));
 
 
-            System.out.println("///////////////////");
-            InMemoryUserRepository inMemoryUserRepository2 = appCtx.getBean(InMemoryUserRepository.class);
-            System.out.println("get 2 from inMemoryUserRepository2   " + inMemoryUserRepository2.get(2));
-
-
-            System.out.println("*****************");
-            InMemoryUserRepository repository = new InMemoryUserRepository();
-            User user1 = repository.get(2);
-            System.out.println(user1);
+//            System.out.println("///////////////////");
+//            InMemoryUserRepository inMemoryUserRepository2 = appCtx.getBean(InMemoryUserRepository.class);
+//            System.out.println("get 2 from inMemoryUserRepository2   " + inMemoryUserRepository2.get(2));
+//
+//
+//            System.out.println("*****************");
+//            InMemoryUserRepository repository = new InMemoryUserRepository();
+//            User user1 = repository.get(2);
+//            System.out.println(user1);
 
 
         }

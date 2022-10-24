@@ -10,6 +10,7 @@ import ru.javawebinar.topjava.repository.UserRepository;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryUserRepository implements UserRepository {
@@ -49,7 +50,7 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public List<User> getAll() {
         log.info("getAll");
-        return new ArrayList<>(repository.values());
+        return new ArrayList<>(repository.values()).stream().sorted().collect(Collectors.toList());
     }
 
     @Override
