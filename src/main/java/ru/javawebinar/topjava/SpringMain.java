@@ -48,12 +48,12 @@ public class SpringMain {
             System.out.println(meal);
             Collection<Meal> meals = inMemoryMealRepository.getAll(2);
             System.out.println(meals);
-            inMemoryMealRepository.delete(4, 2);
-            meals = inMemoryMealRepository.getAll(2);
+            System.out.println(inMemoryMealRepository.delete(4, 3));
+            meals = inMemoryMealRepository.getAll(3);
             System.out.println(meals);
 
             System.out.println("```````````````");
-            System.out.println(inMemoryMealRepository.get(10,1));
+            System.out.println(inMemoryMealRepository.get(10,3));
 
 
         }
