@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.util.UserDataUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,8 +21,7 @@ public class InMemoryUserRepository implements UserRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
 
     {
-        save(new User(null, "User", "user@gmail.com", "1234", 1899, true, new ArrayList<>(Arrays.asList(Role.USER))));
-        save(new User(null, "Administrator", "admin@gmail.com", "1234", 1547, true, new ArrayList<>(Arrays.asList(Role.USER, Role.ADMIN))));
+        UserDataUtil.users.forEach(this::save);
     }
 
     @Override
