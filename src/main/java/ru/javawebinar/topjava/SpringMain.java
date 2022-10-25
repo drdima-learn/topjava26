@@ -7,6 +7,7 @@ import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryMealRepository;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository;
+import ru.javawebinar.topjava.web.meal.MealRestController;
 import ru.javawebinar.topjava.web.user.AdminRestController;
 
 import java.util.Arrays;
@@ -54,6 +55,11 @@ public class SpringMain {
 
             System.out.println("```````````````");
             System.out.println(inMemoryMealRepository.get(10,3));
+
+            System.out.println("@@@@@@@@@@@@@@");
+            MealRestController mealRestController = appCtx.getBean(MealRestController.class);
+            System.out.println(mealRestController.get(1));
+            System.out.println(mealRestController.getAll());
 
 
         }
