@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
@@ -20,12 +22,17 @@ public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
 
     private MealRestController controller;
+    private ConfigurableApplicationContext appCtx;
 
     @Override
     public void init() {
-        try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
-            controller = appCtx.getBean(MealRestController.class);
-        }
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        controller = appCtx.getBean(MealRestController.class);
+    }
+
+    @Override
+    public void destroy() {
+        appCtx.close();
     }
 
     @Override
@@ -69,7 +76,14 @@ public class MealServlet extends HttpServlet {
             case "all":
             default:
                 log.info("getAll");
-                request.setAttribute("meals", controller.getAll());
+
+                LocalDate startDate = LocalDate.parse(request.getParameter("startDate") == null || request.getParameter("startDate").isEmpty() ? LocalDate.MIN.toString() : request.getParameter("startDate"));
+                LocalDate endDate = LocalDate.parse(request.getParameter("endDate") == null || request.getParameter("endDate").isEmpty() ? LocalDate.MAX.toString() : request.getParameter("endDate"));
+                LocalTime startTime = LocalTime.parse(request.getParameter("startTime") == null || request.getParameter("startTime").isEmpty() ? LocalTime.MIN.toString() : request.getParameter("startTime"));
+                LocalTime endTime = LocalTime.parse(request.getParameter("endTime") == null || request.getParameter("endTime").isEmpty() ? LocalTime.MAX.toString() : request.getParameter("endTime"));
+
+
+                request.setAttribute("meals", controller.getAll(startDate, endDate, startTime, endTime));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }

@@ -7,9 +7,11 @@ import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryMealRepository;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository;
+import ru.javawebinar.topjava.web.SecurityUtil;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 import ru.javawebinar.topjava.web.user.AdminRestController;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -60,6 +62,23 @@ public class SpringMain {
             MealRestController mealRestController = appCtx.getBean(MealRestController.class);
             System.out.println(mealRestController.get(1));
             System.out.println(mealRestController.getAll());
+
+
+            inMemoryUserRepository.save(new User(null, "Vasya", "bvasya@gmail.com", "1234", Role.USER));
+            inMemoryUserRepository.save(new User(null, "Vasya", "avasya@gmail.com", "1234", Role.USER));
+
+            System.out.println(inMemoryUserRepository.getAll());
+            //2,1,5,4
+            inMemoryUserRepository.delete(1);
+            inMemoryUserRepository.delete(2);
+            inMemoryUserRepository.delete(3);
+            inMemoryUserRepository.delete(4);
+            inMemoryUserRepository.delete(5);
+            System.out.println(inMemoryUserRepository.getAll());
+
+
+//            SecurityUtil.setAuthUserId(2);
+//            mealRestController.update(new Meal(1, LocalDateTime.now(),"aaa",150),1);
 
 
         }
