@@ -49,6 +49,10 @@ public class MealService {
         return repository.getAll(userId);
     }
 
+    public List<Meal> getAllWithUser(int userId) {
+        return repository.getAllWithUser(userId);
+    }
+
     public void update(Meal meal, int userId) {
         Assert.notNull(meal, "meal must not be null");
         checkNotFoundWithId(repository.save(meal, userId), meal.id());
@@ -58,4 +62,6 @@ public class MealService {
         Assert.notNull(meal, "meal must not be null");
         return repository.save(meal, userId);
     }
+
+
 }

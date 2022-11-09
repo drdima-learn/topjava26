@@ -43,4 +43,13 @@ public class MealTestData {
         m.setUser(UserTestData.admin);
         return m;
     }
+
+    public static List<Meal> getUserMealsWithUser(){
+        List<Meal> userMealsWithUser = userMeals.stream().map(m->{
+            Meal newMeal = new Meal(m);
+            newMeal.setUser(UserTestData.user);
+            return newMeal;
+        }).toList();
+        return userMealsWithUser;
+    }
 }
