@@ -16,6 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.javawebinar.topjava.ActiveDbProfileResolver;
+import ru.javawebinar.topjava.Profiles;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -70,7 +71,7 @@ public abstract class AbstractTest {
     @Before
     public void printSpringProfiles(){
         if (profilePrintCounter==0) {
-            log.info("Spring Profiles: {}", Arrays.toString(env.getActiveProfiles()));
+            log.info("Spring Profiles: {}", Profiles.getActiveProfiles(env));
             profilePrintCounter++;
         }
     }

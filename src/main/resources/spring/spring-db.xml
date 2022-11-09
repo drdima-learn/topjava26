@@ -18,6 +18,8 @@
     </jdbc:initialize-database>
 
 
+
+
     <beans profile="hsqldb">
         <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
 
@@ -103,6 +105,8 @@
               p:entityManagerFactory-ref="entityManagerFactory"/>
 
     </beans>
+
+
 
 
 

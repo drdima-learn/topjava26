@@ -1,6 +1,9 @@
 package ru.javawebinar.topjava;
 
+import org.springframework.core.env.Environment;
 import org.springframework.util.ClassUtils;
+
+import java.util.Arrays;
 
 public class Profiles {
     public static final String
@@ -23,5 +26,9 @@ public class Profiles {
         } else {
             throw new IllegalStateException("Could not find DB driver");
         }
+    }
+
+    public static String getActiveProfiles(Environment env){
+        return Arrays.toString(env.getActiveProfiles());
     }
 }

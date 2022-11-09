@@ -1,15 +1,18 @@
 package ru.javawebinar.topjava;
 
+import org.jetbrains.annotations.NotNull;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
 
 public class UserTestData {
-    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("registered", "roles");
+    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("registered", "roles", "meals");
+    public static final MatcherFactory.Matcher<User> USER_MATCHER_WITH_MEALS = MatcherFactory.usingIgnoringFieldsComparator("registered", "roles", "meals.user");
 
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;
@@ -17,6 +20,8 @@ public class UserTestData {
     public static final int NOT_FOUND = 10;
 
     public static final User user = new User(USER_ID, "User", "user@yandex.ru", "password", Role.USER);
+
+
     public static final User admin = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ADMIN);
     public static final User guest = new User(GUEST_ID, "Guest", "guest@gmail.com", "guest");
 
@@ -33,5 +38,24 @@ public class UserTestData {
         updated.setEnabled(false);
         updated.setRoles(Collections.singletonList(Role.ADMIN));
         return updated;
+    }
+
+
+    public static @NotNull User getAdminWithMeal(){
+        User adminWithMeal = new User(admin);
+        adminWithMeal.setMeals(MealTestData.adminMeals);
+        return adminWithMeal;
+    }
+
+    public static @NotNull User getUserWithMeal(){
+        User userWithMeal = new User(user);
+        userWithMeal.setMeals(MealTestData.userMeals);
+        return userWithMeal;
+    }
+
+    public static @NotNull User getGuestWithMeal(){
+        User guestWithMeal = new User(guest);
+        guestWithMeal.setMeals(List.of());
+        return guestWithMeal;
     }
 }

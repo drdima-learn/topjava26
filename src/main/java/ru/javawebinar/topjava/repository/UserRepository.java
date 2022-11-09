@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.repository;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import ru.javawebinar.topjava.model.User;
 
 import java.util.List;
@@ -18,4 +20,14 @@ public interface UserRepository {
     User getByEmail(String email);
 
     List<User> getAll();
+
+
+    default User getWithMeal(int id){
+        throw new UnsupportedOperationException();
+    }
+
+    default List<User> getAllWithMeal(){
+        throw new UnsupportedOperationException();
+    }
+
 }

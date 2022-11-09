@@ -19,7 +19,7 @@ public abstract class MealServiceTest extends AbstractTest {
 
 
     @Autowired
-    private MealService service;
+    protected MealService service;
 
 
     @Test
@@ -60,10 +60,17 @@ public abstract class MealServiceTest extends AbstractTest {
         MEAL_MATCHER.assertMatch(actual, adminMeal1);
     }
 
+
+
+
+
+
     @Test
     public void getNotFound() {
         assertThrows(NotFoundException.class, () -> service.get(NOT_FOUND, USER_ID));
     }
+
+
 
     @Test
     public void getNotOwn() {
@@ -86,7 +93,7 @@ public abstract class MealServiceTest extends AbstractTest {
 
     @Test
     public void getAll() {
-        MEAL_MATCHER.assertMatch(service.getAll(USER_ID), meals);
+        MEAL_MATCHER.assertMatch(service.getAll(USER_ID), userMeals);
     }
 
     @Test
@@ -99,6 +106,6 @@ public abstract class MealServiceTest extends AbstractTest {
 
     @Test
     public void getBetweenWithNullDates() {
-        MEAL_MATCHER.assertMatch(service.getBetweenInclusive(null, null, USER_ID), meals);
+        MEAL_MATCHER.assertMatch(service.getBetweenInclusive(null, null, USER_ID), userMeals);
     }
 }

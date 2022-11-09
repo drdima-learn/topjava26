@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
@@ -36,6 +37,12 @@ public class UserService {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
+
+    //@Transactional
+    public User getWithMeal(int id) {
+        return checkNotFoundWithId(repository.getWithMeal(id), id);
+    }
+
     public User getByEmail(String email) {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
@@ -45,6 +52,12 @@ public class UserService {
     public List<User> getAll() {
         return repository.getAll();
     }
+
+    @Cacheable("users")
+    public List<User> getAllWithMeal() {
+        return repository.getAllWithMeal();
+    }
+
 
     @CacheEvict(value = "users", allEntries = true)
     public void update(User user) {

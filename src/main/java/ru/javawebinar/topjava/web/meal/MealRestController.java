@@ -2,8 +2,11 @@ package ru.javawebinar.topjava.web.meal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
+import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.to.MealTo;
@@ -20,8 +23,15 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 @Controller
 public class MealRestController {
     private static final Logger log = LoggerFactory.getLogger(MealRestController.class);
+    private static final Logger logResult = LoggerFactory.getLogger("result");
+
+    @Autowired
+    private Environment env;
+
 
     private final MealService service;
+
+
 
     public MealRestController(MealService service) {
         this.service = service;
@@ -30,6 +40,7 @@ public class MealRestController {
     public Meal get(int id) {
         int userId = SecurityUtil.authUserId();
         log.info("get meal {} for user {}", id, userId);
+        logResult.info("Active profiles = {}", Profiles.getActiveProfiles(env));
         return service.get(id, userId);
     }
 
