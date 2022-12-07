@@ -3,6 +3,7 @@ package ru.javawebinar.topjava;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
+import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import java.io.UnsupportedEncodingException;
@@ -20,6 +21,8 @@ public class MatcherFactory {
     public static <T> Matcher<T> usingIgnoringFieldsComparator(Class<T> clazz, String... fieldsToIgnore) {
         return new Matcher<>(clazz, fieldsToIgnore);
     }
+
+
 
     public static class Matcher<T> {
         private final Class<T> clazz;
