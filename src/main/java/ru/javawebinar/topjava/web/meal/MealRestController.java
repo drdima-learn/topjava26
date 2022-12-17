@@ -11,7 +11,6 @@ import ru.javawebinar.topjava.to.MealTo;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -63,7 +62,7 @@ public class MealRestController extends AbstractMealController {
             //@RequestParam @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime end
             @DateTimeFormat(iso = ISO.DATE) @RequestParam LocalDate startDate,
             @DateTimeFormat(iso = ISO.TIME) @RequestParam LocalTime startTime,
-            @DateTimeFormat(iso = ISO.DATE )@RequestParam LocalDate endDate,
+            @DateTimeFormat(iso = ISO.DATE) @RequestParam LocalDate endDate,
             @DateTimeFormat(iso = ISO.TIME) @RequestParam LocalTime endTime
     ) {
         //LocalTime startTime = null;
