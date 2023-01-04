@@ -18,11 +18,18 @@ function add() {
     $("#editRow").modal();
 }
 
+function formatDate(date) {
+    return date.replace("T", " ").substring(0,16);
+}
+
 function updateRow(id) {
     form.find(":input").val("");
     $("#modalTitle").html(i18n["editTitle"]);
     $.get(ctx.ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
+            if (key==="dateTime"){
+                value = formatDate(value);
+            }
             form.find("input[name='" + key + "']").val(value);
         });
         $('#editRow').modal();
