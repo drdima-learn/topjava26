@@ -79,5 +79,7 @@ public class MatcherFactory {
         private static String getContent(MvcResult result) throws UnsupportedEncodingException {
             return result.getResponse().getContentAsString();
         }
+
+
     }
 }
