@@ -11,4 +11,6 @@ public class ErrorInfo {
         this.type = type.name().toLowerCase().substring(0, 1).toUpperCase() + type.name().substring(1).replace("_", " ").toLowerCase();;
         this.detail = detail;
     }
+
+
 }
